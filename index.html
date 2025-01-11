@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<meta name="description" content="The game flashword is a game of alertness, you pay attention to the
+		word letters that will flash on the grid and you guess the word by clicking on the right leters, if they
+		match the word generated, you gain 5 points. at evey time you click the flash button below, a new 5 letters
+		word is generated and flashed. this game have 3 levels increasing in dificulty, there the first level,
+        the second level and the beast level.">
+	</head>
+  <style>
+    body{
+	  text-align: center;
+      margin: auto;	
+	}
+	#start{
+	  color: rgb(255, 242, 0);
+	  font-size: 36px;
+	  font-family: monospace;
+	  border-radius: 6px;
+	  margin-right: 25px;
+	  
+	  border: gray;
+	  background-color: rgb(163, 5, 163);
+	}
+	#start:hover{
+	  background-color: lightgreen;
+	  color: white;
+	}
+	#frontier{
+	   text-align: center;
+	   margin: 70px;
+	}
+  </style>
+  <body style="background-image: url('back2.jpg');">
+    <image id = 'frontier' src = 'gifer.gif' width= '300px' onmouseout="logoBack(this)" onmouseover="logoChanger(this)"></br>
+	<a href='firstLevel.html' title = 'FOCUS!'><button id = 'start' >START</button></a>
+    <script>
+		function logoChanger(){
+            document.getElementById('frontier').src = 'Depp.jpg';
+		}
+		function logoBack(){
+            document.getElementById('frontier').src = 'gifer.gif';
+		}
+	  
+	    
+	    
+	</script>
+  </body>
+</html>

@@ -1,0 +1,1312 @@
+<html>
+  <head>
+  </head>
+  <style>
+    body{
+      text-align: center;
+      margin: auto;	  
+	}
+	
+	#img{
+	 padding-left:348px;
+	 
+	}
+	#score{
+	  float: right;
+	  padding-right: 160px;
+	  font-family: monospace;
+	  font-size: 32px;
+	  color: lightgreen;
+	  font-weight: bold;
+	}
+	#ad{
+	  float: left;
+	}
+	#ad1{
+	  float: right;
+	}
+	#result{
+	  font-family: monospace;
+	  color: orangered;
+	  font-weight: bold;
+	  font-size: 45px;
+	  
+	  
+	  
+	}
+	#watch{
+	  font-family: Arial;
+	  font-size: 20px;
+	  color: black;
+	  font-weight: bold;
+	}
+	
+    .container {
+      background: white;
+      display: inline-block ;
+      
+	  padding: 3px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 69px);
+      grid-template-rows: repeat(6, 59px);
+      grid-gap: 8px;
+    }
+    /* center the cell content */
+    .cell { 
+	  cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font-family: monospace;
+      font-size: 3.5rem;
+      font-weight: bold;
+      background: lightgray;
+    }
+	#btn{
+	  font-size: 28px;
+	  font-family: monospace;
+	  border-radius: 6px;
+	}
+	#btn:hover{
+		background-color: lightgreen;
+	}
+	#secondLevel{
+	  
+	  color: dimgray;
+	  font-family: monospace;
+	  font-size: 25px;
+	  border-radius: 4px;
+	  background-color: gainsboro;
+	}
+	
+	
+	
+	@keyframes shaky {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(0px, 6px) rotate(0deg); }
+      50% { transform: translate(0, 0) rotate(0eg); }
+      75% { transform: translate(0px, 2px) rotate(0deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+	
+	#result.shake {
+      animation: shaky 0s infinite;
+    }
+	#ruleList,#list{
+		font-family: monospace;
+		font-size: 25px;
+		color:rgb(57, 58, 57);
+		text-align: left;
+		font-weight: solid;
+
+	}
+	#rules::backdrop{
+		background: linear-gradient(45deg, blue, red);
+		opacity: .3;
+	}
+	#rules{
+		background-color: aquamarine;
+		text-align: left;
+		margin-top: 100px;
+		box-shadow: 0 0 1 1;
+		max-width: 800px;
+	}
+	#close{
+		font-size: 21px;
+		background-color: rgb(255, 255, 255);
+	}
+	#span{
+		color: green;
+		font-weight: bold;
+	}
+	#span1{
+		font-weight: bold;
+	}
+  </style>
+  <body>
+	  <dialog id="rules">
+         <p id="ruleList">The Rules are simple:</p>
+			 
+			 <li id="list">You click on the <span id="span">FLASH A WORD</span> button below the grid.</li>
+			 <li id="list">then you focus on the grid, after 3 seconds,</br>the letters of a flashword will flash in red.</li>
+			 <li id="list">Click on the right letter boxes that flashed,</br>if it turned green it's the right one.</li>
+			 <li id="list">You have 7 seconds to find all the right letters.</li>
+			 <p id="ruleList">Every word you guess right, you gain 5 points, </br>if you gain 50 points,
+			 you can play the next level </br>by clicking the button way down below.</br>
+			 <span id="span1">There are 3 levels that increase in difficulty at the game, good luck.</span>
+			</p>
+			
+		 
+		 <button id="close" onclick="closer()">Close</button>
+
+	  </dialog>
+    <!--<image id ='ad' src ='ads.png' >-->
+	<!--<image id ='ad1' src ='ads.png' >-->
+    
+	<image id = 'img' src = 'logo3.png' width ='180px' height = '65px'>
+	<p id='score'>Score: 000</p>
+	
+	<h2 id = 'result' class = 'shake'>-----</h2>
+	<p id='watch' ></p>
+	<div class="container">
+      <div class="grid">
+        <div class="cell" id="a" onclick = 'changer1()'>A</div>
+        <div class="cell" id="b" onclick = 'changer2()'>B</div>
+	    <div class="cell" id="c" onclick = 'changer3()'>C</div>
+        <div class="cell" id="d" onclick = 'changer4()'>D</div>
+	    <div class="cell" id="e" onclick = 'changer5()'>E</div>
+        <div class="cell" id="f" onclick = 'changer6()'>F</div>
+        <div class="cell" id="g" onclick = 'changer7()'>G</div>
+        <div class="cell" id="h" onclick = 'changer8()'>H</div>
+        <div class="cell" id="i" onclick = 'changer9()'>I</div>
+        <div class="cell" id="j" onclick = 'changer10()'>J</div>
+        <div class="cell" id="k" onclick = 'changer11()'>K</div>
+	    <div class="cell" id="l" onclick = 'changer12()'>L</div>
+	    <div class="cell" id="m" onclick = 'changer13()'>M</div>
+	    <div class="cell" id="n" onclick = 'changer14()'>N</div>
+	    <div class="cell" id="o" onclick = 'changer15()'>O</div>
+	    <div class="cell" id="p" onclick = 'changer16()'>P</div>
+	    <div class="cell" id="q" onclick = 'changer17()'>Q</div>
+	    <div class="cell" id="r" onclick = 'changer18()'>R</div>
+        <div class="cell" id="s" onclick = 'changer19()'>S</div>
+        <div class="cell" id="t" onclick = 'changer20()'>T</div>
+        <div class="cell" id="u" onclick = 'changer21()'>U</div>
+        <div class="cell" id="v" onclick = 'changer22()'>V</div>
+        <div class="cell" id="w" onclick = 'changer23()'>W</div>
+        <div class="cell" id="x" onclick = 'changer24()'>X</div>
+        <div class="cell" id="y" onclick = 'changer25()'>Y</div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+		<div class="cell" id="z" onclick = 'changer26()'>Z</div>
+		<div class="cell"></div>
+		<div class="cell"></div>
+      </div>
+    </div>
+	</br></br>
+	<button id ='btn' class='butt' onclick = 'play()'>FLASH A WORD</button></br>
+	<a  href='secondLevel.html' title = 'Get 100 score points to play this!'> 
+	<button id = 'secondLevel'>The second level!</button></a>
+	
+    <script>
+		//dialog opener:
+		setTimeout(function dialoger(){
+			document.getElementById('rules').showModal();
+		}, 2900);
+		function closer(){
+			document.getElementById('rules').close();
+		}
+	  //this is to display a colorful grid show:
+	    setTimeout(function flash(){
+	       return document.getElementById('a').style.backgroundColor = "red";
+	    }, 100);
+		setTimeout(function flash(){
+	       return document.getElementById('b').style.backgroundColor = "yellow";
+	    }, 200);
+		setTimeout(function flash(){
+	       return document.getElementById('f').style.backgroundColor = "cyan";
+	    }, 300);
+		setTimeout(function flash(){
+	       return document.getElementById('c').style.backgroundColor = "brown";
+	    }, 400);
+		setTimeout(function flash(){
+	       return document.getElementById('g').style.backgroundColor = "yellow";
+	    }, 500);
+		setTimeout(function flash(){
+	       return document.getElementById('k').style.backgroundColor = "crimson";
+	    }, 600);
+		setTimeout(function flash(){
+	       return document.getElementById('d').style.backgroundColor = "purple";
+	    }, 700);
+		setTimeout(function flash(){
+	       return document.getElementById('h').style.backgroundColor = "blue";
+	    }, 800);
+		setTimeout(function flash(){
+	       return document.getElementById('l').style.backgroundColor = "green";
+	    }, 900);
+		setTimeout(function flash(){
+	       return document.getElementById('p').style.backgroundColor = "coral";
+	    }, 1000);
+		setTimeout(function flash(){
+	       return document.getElementById('e').style.backgroundColor = "deeppink";
+	    }, 1100);
+		setTimeout(function flash(){
+	       return document.getElementById('i').style.backgroundColor = "gold";
+	    }, 1200);
+		setTimeout(function flash(){
+	       return document.getElementById('m').style.backgroundColor = "greenyellow";
+	    }, 1300);
+		setTimeout(function flash(){
+	       return document.getElementById('q').style.backgroundColor = "dodgerblue";
+	    }, 1400);
+		setTimeout(function flash(){
+	       return document.getElementById('u').style.backgroundColor = "orangered";
+	    }, 1500);
+		setTimeout(function flash(){
+	       return document.getElementById('j').style.backgroundColor = "violet";
+	    }, 1600);
+		setTimeout(function flash(){
+	       return document.getElementById('n').style.backgroundColor = "tomato";
+	    }, 1700);
+		setTimeout(function flash(){
+	       return document.getElementById('r').style.backgroundColor = "teal";
+	    }, 1800);
+		setTimeout(function flash(){
+	       return document.getElementById('v').style.backgroundColor = "pink";
+	    }, 1900);
+		setTimeout(function flash(){
+	       return document.getElementById('o').style.backgroundColor = "palegreen";
+	    }, 2000);
+		setTimeout(function flash(){
+	       return document.getElementById('s').style.backgroundColor = "red";
+	    }, 2100);
+		setTimeout(function flash(){
+	       return document.getElementById('w').style.backgroundColor = "olive";
+	    }, 2200);
+		setTimeout(function flash(){
+	       return document.getElementById('t').style.backgroundColor = "navy";
+	    }, 2300);
+		setTimeout(function flash(){
+	       return document.getElementById('x').style.backgroundColor = "mistyrose";
+	    }, 2400);
+		setTimeout(function flash(){
+	       return document.getElementById('y').style.backgroundColor = "chocolate";
+	    }, 2500);
+		setTimeout(function flash(){
+	       return document.getElementById('z').style.backgroundColor = "blueviolet";
+	    }, 2600);
+		
+		
+		/*The setTimaeouts above change the color of the dives to diffrent colors,the ones below
+		turns them back to lightgray in couple hundred milliseconds*/
+		setTimeout(function flash(){
+	       return document.getElementById('a').style.backgroundColor = "lightgray";
+	    }, 200);
+		setTimeout(function flash(){
+	       return document.getElementById('b').style.backgroundColor = "lightgray";
+	    }, 300);
+		setTimeout(function flash(){
+	       return document.getElementById('f').style.backgroundColor = "lightgray";
+	    }, 400);
+		setTimeout(function flash(){
+	       return document.getElementById('c').style.backgroundColor = "lightgray";
+	    }, 500);
+		setTimeout(function flash(){
+	       return document.getElementById('g').style.backgroundColor = "lightgray";
+	    }, 600);
+		setTimeout(function flash(){
+	       return document.getElementById('k').style.backgroundColor = "lightgray";
+	    }, 700);
+		setTimeout(function flash(){
+	       return document.getElementById('d').style.backgroundColor = "lightgray";
+	    }, 800);
+		setTimeout(function flash(){
+	       return document.getElementById('h').style.backgroundColor = "lightgray";
+	    }, 900);
+		setTimeout(function flash(){
+	       return document.getElementById('l').style.backgroundColor = "lightgray";
+	    }, 1000);
+		setTimeout(function flash(){
+	       return document.getElementById('p').style.backgroundColor = "lightgray";
+	    }, 1100);
+	    setTimeout(function flash(){
+	       return document.getElementById('e').style.backgroundColor = "lightgray";
+	    }, 1200);
+		setTimeout(function flash(){
+	       return document.getElementById('i').style.backgroundColor = "lightgray";
+	    }, 1300);
+		setTimeout(function flash(){
+	       return document.getElementById('m').style.backgroundColor = "lightgray";
+	    }, 1400);
+		setTimeout(function flash(){
+	       return document.getElementById('q').style.backgroundColor = "lightgray";
+	    }, 1500);
+		setTimeout(function flash(){
+	       return document.getElementById('u').style.backgroundColor = "lightgray";
+	    }, 1600);
+		setTimeout(function flash(){
+	       return document.getElementById('j').style.backgroundColor = "lightgray";
+	    }, 1700);
+		setTimeout(function flash(){
+	       return document.getElementById('n').style.backgroundColor = "lightgray";
+	    }, 1800);
+		setTimeout(function flash(){
+	       return document.getElementById('r').style.backgroundColor = "lightgray";
+	    }, 1900);
+		setTimeout(function flash(){
+	       return document.getElementById('v').style.backgroundColor = "lightgray";
+	    }, 2000);
+		setTimeout(function flash(){
+	       return document.getElementById('o').style.backgroundColor = "lightgray";
+	    }, 2100);
+		setTimeout(function flash(){
+	       return document.getElementById('s').style.backgroundColor = "lightgray";
+	    }, 2200);
+		setTimeout(function flash(){
+	       return document.getElementById('w').style.backgroundColor = "lightgray";
+	    }, 2300);
+		setTimeout(function flash(){
+	       return document.getElementById('t').style.backgroundColor = "lightgray";
+	    }, 2400);
+		setTimeout(function flash(){
+	       return document.getElementById('x').style.backgroundColor = "lightgray";
+	    }, 2500);
+		setTimeout(function flash(){
+	       return document.getElementById('y').style.backgroundColor = "lightgray";
+	    }, 2600);
+		setTimeout(function flash(){
+	       return document.getElementById('z').style.backgroundColor = "lightgray";
+	    }, 2700);
+	
+	
+	
+	
+	  //this is to disable passing to another level in the begining:
+	  document.getElementById('secondLevel').disabled = true;
+	  
+	  
+	  //toadd 0s to the begining of a the scor if it's made of 1 digit or 2 digits:
+	  //.padStart(targetLength, 'padString')
+	  
+	  /*finish this code by make a function that take a random word letters and 
+	  asign each one of them in a variable, then take those variables and put them in
+	  the play function's setTimeout functions' document.getElementById(`${here}`)'s
+	  parentheses.
+	  
+	  Some commonly used 5 lettered words with no repeating letters are light, might,
+	  white, flake, poise, noise, voice, vocal, abode, chase, cabin, right, focal,
+	  focus, train, waste, eight, yacht, adopt, crate, sedan, paste, paint, faint,
+	  whale, quail, image, zebra, brave, crave, dream, steam, stare, flare, great,
+	  shale, frail, grail, night, sight, fight, chain, break, brake, trace, satin,
+	  haste, urban, eland, extra, hover, cover, lover.
+	  
+	  THIS GAME HAS TO HAVE 2 LEVELS:
+	  1-first level: to guess the 5 letters by clicking on them in random order and 
+	  see if one guessed the word's letter right.
+	  2-second level: is to flash other letters for distraction.
+	  3-third level: is to click on the right letters in the right order that
+	  forms the random word*/
+	  
+	  //there are 134 5letter words with no repeating letters:
+	  let array = ['yours','light', 'might', 'white', 'flake', 'poise', 'noise', 'voice',
+	  'vocal', 'abode', 'chase', 'cabin', 'right', 'focal', 'focus', 'train', 'waste',
+	  'eight', 'yacht', 'adopt', 'crate', 'sedan', 'paste', 'paint', 'faint', 'lover',
+	  'whale', 'quail', 'image', 'house', 'zebra', 'brave', 'crave', 'dream', 'steam',
+	  'flare', 'great', 'shale', 'frail', 'grail', 'night', 'sight', 'fight', 'chain', 
+	  'break', 'brake', 'trace', 'satin', 'haste', 'urban', 'eland', 'extra', 'hover',
+	  'cover', 'acted', 'azuki', 'azoic', 'after', 'amigo', 'adept', 'among', 'admit',
+	  'adopt', 'alcid', 'alive', 'aloft', 'aunty', 'about', 'abode', 'antic', 'noble',
+	  'anime', 'amuse', 'adore', 'aside', 'adios', 'anode', 'audit', 'adult', 'alone', 
+	  'alter', 'waxed', 'waxes', 'waxer', 'wimpy', 'wreck', 'wings', 'witch', 'awoke', 
+	  'awake', 'woken', 'whorl', 'whirl', 'whole', 'wafer', 'worth', 'weird', 'wrong',
+	  'worst', 'water', 'waste', 'world', 'words', 'women', 'wrong', 'whine', 'wetly',
+	  'weary', 'waves', 'waver', 'whose', 'stare', 'squad', 'sport', 'scary', 'squaw',
+	  'soyuz', 'squab', 'smaze', 'squib', 'spitz', 'sixty', 'sized', 'shaky', 'squid',
+	  'sixth', 'squad', 'shoji', 'sucky', 'squat', 'sizer', 'shock', 'shake', 'smack'];
+	  let myWord = '';
+	  let obj = {};
+	  let scoreReduced = 0;
+	  let countDowner = 0;
+	  function play(){
+
+		
+	    count = 0;
+	    //clear the result shown on the page:
+		document.getElementById('result').innerHTML = '-----';
+	  
+	    //an alert message to make the player focus on the grid.
+	    document.getElementById('watch').innerHTML = 'WATCH THE LETTER BOXES CARFULLY! ';
+		
+		//this is to show the message 'flash another' on the button:
+		document.getElementById('btn').innerHTML = 'FLASH ANOTHER';
+		
+		//this code is to set all the squares back to lightgray at every play.
+	    document.getElementById('a').style.backgroundColor = "lightgray";
+	    document.getElementById('b').style.backgroundColor = "lightgray";
+	    document.getElementById('c').style.backgroundColor = "lightgray";
+	    document.getElementById('d').style.backgroundColor = "lightgray";
+	    document.getElementById('e').style.backgroundColor = "lightgray";
+	    document.getElementById('f').style.backgroundColor = "lightgray";
+	    document.getElementById('g').style.backgroundColor = "lightgray";
+	    document.getElementById('h').style.backgroundColor = "lightgray";
+	    document.getElementById('i').style.backgroundColor = "lightgray";
+	    document.getElementById('j').style.backgroundColor = "lightgray";
+	    document.getElementById('k').style.backgroundColor = "lightgray";
+	    document.getElementById('l').style.backgroundColor = "lightgray";
+	    document.getElementById('m').style.backgroundColor = "lightgray";
+	    document.getElementById('n').style.backgroundColor = "lightgray";
+	    document.getElementById('o').style.backgroundColor = "lightgray";
+	    document.getElementById('p').style.backgroundColor = "lightgray";
+	    document.getElementById('q').style.backgroundColor = "lightgray";
+	    document.getElementById('r').style.backgroundColor = "lightgray";
+	    document.getElementById('s').style.backgroundColor = "lightgray";
+	    document.getElementById('t').style.backgroundColor = "lightgray";
+	    document.getElementById('u').style.backgroundColor = "lightgray";
+	    document.getElementById('v').style.backgroundColor = "lightgray";
+	    document.getElementById('w').style.backgroundColor = "lightgray";
+	    document.getElementById('x').style.backgroundColor = "lightgray";
+	    document.getElementById('y').style.backgroundColor = "lightgray";
+	    document.getElementById('z').style.backgroundColor = "lightgray";
+	  
+		
+		//this code is to randomly choose the word that will be flashed on the grid:
+		obj = {};
+	    myWord = '';
+	    let random = Math.floor(Math.random() * array.length-1);
+		myWord = array[random];
+		for(let i=0;i<myWord.length;i++){
+	      obj[myWord[i]] = myWord[i];
+	    }
+		
+		let keys = Object.keys(obj);
+	    setTimeout(function flash(){
+	       return document.getElementById(obj[keys[0]]).style.backgroundColor = "red";
+	    }, 3000);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[1]]).style.backgroundColor = "red";
+	    }, 3000);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[2]]).style.backgroundColor = "red";
+	    }, 3000);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[3]]).style.backgroundColor = "red";
+	    }, 3000);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[4]]).style.backgroundColor = "red";
+	    }, 3000);
+		/*The setTimaeouts above change the color of the dives to red,the ones below
+		turns them back to lightgray in 150 milliseconds*/
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[0]]).style.backgroundColor = "lightgray";
+	    }, 3030);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[1]]).style.backgroundColor = "lightgray";
+	    }, 3030);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[2]]).style.backgroundColor = "lightgray";
+	    }, 3030);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[3]]).style.backgroundColor = "lightgray";
+	    }, 3030);
+		setTimeout(function flash(){
+	       return document.getElementById(obj[keys[4]]).style.backgroundColor = "lightgray";
+	    }, 3030);
+		
+		document.querySelector('.butt').disabled = true;
+		setTimeout(function on(){
+		   document.querySelector('.butt').disabled = false;
+		   document.getElementById(obj[keys[0]]).style.backgroundColor = "orangered";
+	       document.getElementById(obj[keys[1]]).style.backgroundColor = "orangered";
+	       document.getElementById(obj[keys[2]]).style.backgroundColor = "orangered";
+	       document.getElementById(obj[keys[3]]).style.backgroundColor = "orangered";
+	       document.getElementById(obj[keys[4]]).style.backgroundColor = "orangered";
+	       document.getElementById('result').innerHTML = myWord.toUpperCase();
+		   if(document.getElementById('watch').innerHTML == 'CLICK ON THE 5 LETTERS THAT FLASHED OUT '+counter){
+		      document.getElementById('watch').innerHTML = 'INCORRECT';
+		   }
+		   
+		   document.getElementById('result').style.animation = 'shaky 0.9s infinite';
+		   setTimeout(function stopper(){
+				document.getElementById('result').style.animation = 'shaky 0s infinite'
+		   },4000);
+		   
+		   //this is to calculate the score and show it up left the screen:
+		   scoreReduced += finalScore.reduce((a,b) => a+b);
+		   document.getElementById('score').innerHTML = 'Score: '+scoreReduced.toString().padStart(3, '0');
+		   finalScore = [];
+		   
+		   //this is to enable the next level button if a certain score s met:
+		   if(scoreReduced > 4){
+	         document.getElementById('secondLevel').disabled = false;
+			 document.getElementById('secondLevel').style.background = 'lightgreen';
+			 
+			 /*document.getElementById('secondLevel').addEventListener("mouseenter", function( event ) {
+
+             }, false);*/
+			 
+			 setInterval(function flicker(){
+               document.getElementById('secondLevel').style.color = "purple";
+			   document.getElementById('secondLevel').style.background = "orange";
+			   document.getElementById('secondLevel').style.border = 'orange';
+			 },800)
+			 setInterval(function flicker(){
+
+			   document.getElementById('secondLevel').style.color = "white";
+			   document.getElementById('secondLevel').style.background = "lightgreen";
+			   document.getElementById('secondLevel').style.border = 'lightgreen';
+			 },1600)
+			 
+	       }
+		   
+		}, 12000);
+		let counter = 0;
+		
+		//this is to tell the player to guess 5 letters by clicking on them.
+		setTimeout(function on(){
+		   document.getElementById('watch').innerHTML = 'CLICK ON THE 5 LETTERS THAT FLASHED OUT';
+		   setTimeout(function timeout(){
+		     counter = 7;
+		     countDowner = setInterval(function countDown(){
+		        counter -=1;
+				document.getElementById('watch').innerHTML = 'CLICK ON THE 5 LETTERS THAT FLASHED OUT '+counter;
+		        if(counter == 1){
+			      clearInterval(countDowner);
+			    }
+			 },1000);
+			 
+		   },500);
+		   
+		}, 3500);
+
+		
+	  }
+	  /*this piece of code is to turn all letters chosen by the player, to
+	  lightgreen if they are correct, some of the code is put in every changer function*/
+	  let theTry = {};
+	  let keys = 0;
+	  let count = 0;
+	  let reg = null;
+	  let score = 0;
+	  let finalScore = [];
+	  
+	  /* you need to make this code so that player can only click 5 divs.  */
+	  function changer1(){
+	    if(document.getElementById('a').style.backgroundColor == "lightblue"){
+		  document.getElementById('a').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  
+		  delete theTry['a'];
+		}else if(document.getElementById('a').style.backgroundColor == "lightgray"){
+		  document.getElementById('a').style.backgroundColor = "lightblue";
+		  theTry['a'] = 'a';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['a']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['a']).style.backgroundColor = "lightgreen";
+			//This is to tell the player if he got it right:
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	  function changer2(){
+	    if(document.getElementById('b').style.backgroundColor == "lightblue"){
+		  document.getElementById('b').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['b'];
+		}else if(document.getElementById('b').style.backgroundColor == "lightgray"){
+		  document.getElementById('b').style.backgroundColor = "lightblue";
+		  theTry['b'] = 'b';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['b']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['b']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		  
+		}
+	  }
+	  function changer3(){
+	    if(document.getElementById('c').style.backgroundColor == "lightblue"){
+		  document.getElementById('c').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['c'];
+		}else if(document.getElementById('c').style.backgroundColor == "lightgray"){
+		  document.getElementById('c').style.backgroundColor = "lightblue";
+		  theTry['c'] = 'c';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['c']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['c']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+	          clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+
+		}
+	  }
+	  function changer4(){
+	    if(document.getElementById('d').style.backgroundColor == "lightblue"){
+		  document.getElementById('d').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['d'];
+		}else if(document.getElementById('d').style.backgroundColor == "lightgray"){
+		  document.getElementById('d').style.backgroundColor = "lightblue";
+		  theTry['d'] = 'd';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['d']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['d']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+
+		}
+	  }
+	  function changer5(){
+	    if(document.getElementById('e').style.backgroundColor == "lightblue"){
+		  document.getElementById('e').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['e'];
+		}else if(document.getElementById('e').style.backgroundColor == "lightgray"){
+		  document.getElementById('e').style.backgroundColor = "lightblue";
+		  theTry['e'] = 'e';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['e']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['e']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		  
+		}
+	  }
+	  function changer6(){
+	    if(document.getElementById('f').style.backgroundColor == "lightblue"){
+		  document.getElementById('f').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['f'];
+		}else if(document.getElementById('f').style.backgroundColor == "lightgray"){
+		  document.getElementById('f').style.backgroundColor = "lightblue";
+		  theTry['f'] = 'f';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['f']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['f']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer7(){
+	    if(document.getElementById('g').style.backgroundColor == "lightblue"){
+		  document.getElementById('g').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['g'];
+		}else if(document.getElementById('g').style.backgroundColor == "lightgray"){
+		  document.getElementById('g').style.backgroundColor = "lightblue";
+		  theTry['g'] = 'g';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['g']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['g']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer8(){
+	    if(document.getElementById('h').style.backgroundColor == "lightblue"){
+		  document.getElementById('h').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['h'];
+		}else if(document.getElementById('h').style.backgroundColor == "lightgray"){
+		  document.getElementById('h').style.backgroundColor = "lightblue";
+		  theTry['h'] = 'h';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['h']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['h']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer9(){
+	    if(document.getElementById('i').style.backgroundColor == "lightblue"){
+		  document.getElementById('i').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['i'];
+		}else if(document.getElementById('i').style.backgroundColor == "lightgray"){
+		  document.getElementById('i').style.backgroundColor = "lightblue";
+		  theTry['i'] = 'i';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['i']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['i']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer10(){
+	    if(document.getElementById('j').style.backgroundColor == "lightblue"){
+		  document.getElementById('j').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['j'];
+		}else if(document.getElementById('j').style.backgroundColor == "lightgray"){
+		  document.getElementById('j').style.backgroundColor = "lightblue";
+		  theTry['j'] = 'j';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['j']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['j']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer11(){
+	    if(document.getElementById('k').style.backgroundColor == "lightblue"){
+		  document.getElementById('k').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['k'];
+		}else if(document.getElementById('k').style.backgroundColor == "lightgray"){
+		  document.getElementById('k').style.backgroundColor = "lightblue";
+		  theTry['k'] = 'k';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['k']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['k']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer12(){
+	    if(document.getElementById('l').style.backgroundColor == "lightblue"){
+		  document.getElementById('l').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['l'];
+		}else if(document.getElementById('l').style.backgroundColor == "lightgray"){
+		  document.getElementById('l').style.backgroundColor = "lightblue";
+		  theTry['l'] = 'l';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['l']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['l']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer13(){
+	    if(document.getElementById('m').style.backgroundColor == "lightblue"){
+		  document.getElementById('m').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['m'];
+		}else if(document.getElementById('m').style.backgroundColor == "lightgray"){
+		  document.getElementById('m').style.backgroundColor = "lightblue";
+		  theTry['m'] = 'm';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['m']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['m']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer14(){
+	    if(document.getElementById('n').style.backgroundColor == "lightblue"){
+		  document.getElementById('n').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['n'];
+		}else if(document.getElementById('n').style.backgroundColor == "lightgray"){
+		  document.getElementById('n').style.backgroundColor = "lightblue";
+		  theTry['n'] = 'n';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['n']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['n']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer15(){
+	    if(document.getElementById('o').style.backgroundColor == "lightblue"){
+		  document.getElementById('o').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['o'];
+		}else if(document.getElementById('o').style.backgroundColor == "lightgray"){
+		  document.getElementById('o').style.backgroundColor = "lightblue";
+		  theTry['o'] = 'o';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['o']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['o']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer16(){
+	    if(document.getElementById('p').style.backgroundColor == "lightblue"){
+		  document.getElementById('p').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['p'];
+		}else if(document.getElementById('p').style.backgroundColor == "lightgray"){
+		  document.getElementById('p').style.backgroundColor = "lightblue";
+		  theTry['p'] = 'p';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['p']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['p']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer17(){
+	    if(document.getElementById('q').style.backgroundColor == "lightblue"){
+		  document.getElementById('q').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['q'];
+		}else if(document.getElementById('q').style.backgroundColor == "lightgray"){
+		  document.getElementById('q').style.backgroundColor = "lightblue";
+		  theTry['q'] = 'q';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['q']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['q']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer18(){
+	    if(document.getElementById('r').style.backgroundColor == "lightblue"){
+		  document.getElementById('r').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['r'];
+		}else if(document.getElementById('r').style.backgroundColor == "lightgray"){
+		  document.getElementById('r').style.backgroundColor = "lightblue";
+		  theTry['r'] = 'r';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['r']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['r']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer19(){
+	    if(document.getElementById('s').style.backgroundColor == "lightblue"){
+		  document.getElementById('s').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['s'];
+		}else if(document.getElementById('s').style.backgroundColor == "lightgray"){
+		  document.getElementById('s').style.backgroundColor = "lightblue";
+		  theTry['s'] = 's';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['s']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['s']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer20(){
+	    if(document.getElementById('t').style.backgroundColor == "lightblue"){
+		  document.getElementById('t').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['t'];
+		}else if(document.getElementById('t').style.backgroundColor == "lightgray"){
+		  document.getElementById('t').style.backgroundColor = "lightblue";
+		  theTry['t'] = 't';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['t']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['t']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer21(){
+	    if(document.getElementById('u').style.backgroundColor == "lightblue"){
+		  document.getElementById('u').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['u'];
+		}else if(document.getElementById('u').style.backgroundColor == "lightgray"){
+		  document.getElementById('u').style.backgroundColor = "lightblue";
+		  theTry['u'] = 'u';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['u']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['u']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }		  
+		}
+	  }
+	  function changer22(){
+	    if(document.getElementById('v').style.backgroundColor == "lightblue"){
+		  document.getElementById('v').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['v'];
+		}else if(document.getElementById('v').style.backgroundColor == "lightgray"){
+		  document.getElementById('v').style.backgroundColor = "lightblue";
+		  theTry['v'] = 'v';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['v']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['v']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	  function changer23(){
+	    if(document.getElementById('w').style.backgroundColor == "lightblue"){
+		  document.getElementById('w').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['w'];
+		}else if(document.getElementById('w').style.backgroundColor == "lightgray"){
+		  document.getElementById('w').style.backgroundColor = "lightblue";
+		  theTry['w'] =  'w';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['w']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['w']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	  function changer24(){
+	    if(document.getElementById('x').style.backgroundColor == "lightblue"){
+		  document.getElementById('x').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['x'];
+		}else if(document.getElementById('x').style.backgroundColor == "lightgray"){
+		  document.getElementById('x').style.backgroundColor = "lightblue";
+		  theTry['x'] = 'x';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['x']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['x']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	  function changer25(){
+	    if(document.getElementById('y').style.backgroundColor == "lightblue"){
+		  document.getElementById('y').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['y'];
+		}else if(document.getElementById('y').style.backgroundColor == "lightgray"){
+		  document.getElementById('y').style.backgroundColor = "lightblue";
+		  theTry['y'] = 'y';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['y']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['y']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	  function changer26(){
+	    if(document.getElementById('z').style.backgroundColor == "lightblue"){
+		  document.getElementById('z').style.backgroundColor = "lightgray";
+		  if(score > 1){
+		    finalScore.push(-1);
+		  }
+		  delete theTry['z'];
+		}else if(document.getElementById('z').style.backgroundColor == "lightgray"){
+		  document.getElementById('z').style.backgroundColor = "lightblue";
+		  theTry['z'] = 'z';
+		  /*this piece of code is to turn all letters chosen by the player, to
+	      lightgreen if they are correct */
+	      
+		  reg = RegExp(theTry['z']);
+		  if(reg.test(myWord)){
+		    document.getElementById(theTry['z']).style.backgroundColor = "lightgreen";
+			count += 1;
+			if(count == 5){
+			  clearInterval(countDowner);
+			  document.getElementById('watch').innerHTML = 'CORRECT';
+			  score+=5;
+			  finalScore.push(score);
+			  score = 0;
+			  count = 0;
+			}
+		  }
+		}
+	  }
+	</script>
+  </body>
+</html
+
